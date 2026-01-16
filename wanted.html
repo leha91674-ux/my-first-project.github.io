@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Coat_of_arms_of_the_Ministry_of_Internal_Affairs_of_Russia.svg/1200px-Coat_of_arms_of_the_Ministry_of_Internal_Affairs_of_Russia.svg.png">
+    <title>Официальный розыск - МВД России</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2461, #1e3799);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-left: 10px solid #e74c3c;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .header .badge {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        .wanted-card {
+            display: flex;
+            padding: 30px;
+            gap: 40px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+        }
+        
+        .photo-section {
+            flex: 0 0 350px;
+            text-align: center;
+        }
+        
+        .photo {
+            width: 100%;
+            border-radius: 10px;
+            border: 5px solid #2c3e50;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: #000;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .photo-placeholder {
+            background: linear-gradient(45deg, #2c3e50, #4a69bd);
+            width: 100%;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        
+        .photo-placeholder .text {
+            margin-top: 20px;
+            color: #ddd;
+        }
+        
+        .details {
+            flex: 1;
+        }
+        
+        .details h2 {
+            color: #e74c3c;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .info-item h3 {
+            color: #2c3e50;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .info-item p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .danger-level {
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+        
+        .contacts {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .contacts h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .phone {
+            font-size: 28px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .reward {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .comments {
+            background: #f8f9fa;
+            padding: 30px;
+            border-top: 3px solid #ddd;
+        }
+        
+        .comment {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comment .author {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .comment .date {
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+        }
+        
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            animation: alertBlink 1s infinite;
+            display: none;
+        }
+        
+        @keyframes alertBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @media (max-width: 768px) {
+            .wanted-card {
+                flex-direction: column;
+            }
+            
+            .photo-section {
+                flex: none;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="alert" id="alert">НОВАЯ ИНФОРМАЦИЯ ПО ДЕЛУ!</div>
+    
+    <div class="header">
+        <h1>🔴 ОФИЦИАЛЬНЫЙ РОЗЫСК - МВД РОССИИ 🔴</h1>
+        <p>Уголовный розыск № 3487-2026 | Дело о мошенничестве в особо крупном размере</p>
+        <div class="badge">ОПАСЕН ДЛЯ ОБЩЕСТВА</div>
+    </div>
+    
+    <div class="container">
+        <div class="wanted-card">
+            <div class="photo-section">
+                <div class="photo">
+                    <div class="photo-placeholder">
+                     <img src="МаксимТанкист.jpg" alt="Разыскиваемый" style="width:100%; border-radius:5px;"></div>
+                    </div>
+                </div>
+                <div class="reward">
+                    💰 ВОЗНАГРАЖДЕНИЕ: 500.000 ₽
+                </div>
+            </div>
+            
+            <div class="details">
+                <h2>РАЗЫСКИВАЕТСЯ:</h2>
+                
+                <div class="danger-level">
+                    ⚠️ ВНИМАНИЕ: Вооружён и опасен! Не приближаться самостоятельно!
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Фамилия</h3>
+                        <p>Батенко</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Имя</h3>
+                        <p>Максим</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Отчество</h3>
+                        <p>Дмитриевич</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Прозвище</h3>
+                        <p>"СОСУНЧИК" / "ЛОШАРА"</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Дата рождения</h3>
+                        <p>27.05.2012 (31 год)</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Место рождения</h3>
+                        <p>г. Сургут</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Последний адрес</h3>
+                        <p>г. Сургут, ул. Показаньево, д. 6, кв. 6</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Паспорт</h3>
+                        <p>45 07 123456</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Рост</h3>
+                        <p>157 см</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Телосложение</h3>
+                        <p>:жирное</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Цвет волос</h3>
+                        <p>Тёмно-русые</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Особые приметы</h3>
+                        <p>Шрам на губе (3 см), татуировка "ЛОХ" на правой руке</p>
+                    </div>
+                </div>
+                
+                <div class="info-item" style="grid-column: span 2;">
+                    <h3>Преступления</h3>
+                    <p>Мошенничество (ст. 159 УК РФ), отмывание денег (ст. 174 УК РФ), организация преступного сообщества (ст. 210 УК РФ), незаконный оборот оружия</p>
+                </div>
+                
+                <div class="info-item" style="grid-column: span 2;">
+                    <h3>Последнее местонахождение</h3>
+                    <p>Замечен "ЕКБ-город". Возможно скрывается в Мегионе.</p>
+                </div>
+                
+                <div class="contacts">
+                    <h3>📞 КОНТАКТЫ ДЛЯ ИНФОРМАЦИИ:</h3>
+                    <p>Дежурная часть МВД по г. Москве</p>
+                    <div class="phone">8 (495) 123-45-67</div>
+                    <p>Горячая линия: <strong>112</strong> (с мобильного)</p>
+                    <p>Email: <strong>wanted@mvd.ru</strong></p>
+                    <p style="margin-top: 15px; color: #f1c40f;">💡 Вся информация конфиденциальна. Возможна выплата вознаграждения.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comments">
+            <h3>💬 СООБЩЕНИЯ ОТ СЛЕДОВАТЕЛЕЙ:</h3>
+            
+            <div class="comment">
+                <div class="author">Следователь Петров А.В. <span class="date">Сегодня, 14:30</span></div>
+                <p>Разыскиваемый представляет повышенную опасность. Ведётся прослушка его предполагаемых сообщников. Возможен побег за границу.</p>
+            </div>
+            
+            <div class="comment">
+                <div class="author">Оперативник Сидоров И.М. <span class="date">Вчера, 22:15</span></div>
+                <p>Получена информация о возможном укрывательстве в коттеджном посёлке "Берёзки". Проводится оперативная проверка.</p>
+            </div>
+            
+            <div class="comment">
+                <div class="author">Капитан полиции Козлова О.П. <span class="date">2 дня назад, 10:45</span></div>
+                <p>Гражданин Иванов А.С. замечен на камерах наблюдения возле банка на Ленинском проспекте. Носил чёрную куртку и кепку.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 Министерство внутренних дел Российской Федерации. Официальный ресурс.</p>
+            <p>Все права защищены. Распространение ложной информации преследуется по закону.</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #bdc3c7;">Дело № 3487-2026 | Статус: Активный розыск | Последнее обновление: 08.01.2026</p>
+        </div>
+    </div>
+    
+    <div class="counter" id="counter">
+        Просмотров: <span id="views">15487</span>
+    </div>
+
+    <script>
+        // Счётчик просмотров
+        let views = 15487;
+        setInterval(() => {
+            views += Math.floor(Math.random() * 3);
+            document.getElementById('views').textContent = views.toLocaleString();
+        }, 3000);
+        
+        // Случайные алерты
+        const alerts = [
+            "НОВАЯ ИНФОРМАЦИЯ ПО ДЕЛУ!",
+            "ПОЛУЧЕН СИГНАЛ О МЕСТОНАХОЖДЕНИИ!",
+            "ВОЗНАГРАЖДЕНИЕ УВЕЛИЧЕНО!",
+            "ОПЕРАТИВНАЯ СВОДКА ОБНОВЛЕНА!"
+        ];
+        
+        setInterval(() => {
+            const alertEl = document.getElementById('alert');
+            alertEl.textContent = alerts[Math.floor(Math.random() * alerts.length)];
+            alertEl.style.display = 'block';
+            setTimeout(() => {
+                alertEl.style.display = 'none';
+            }, 3000);
+        }, 15000);
+        
+        // Эффект "секретных сообщений"
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('info-item')) {
+                const messages = [
+                    "ШИФР 045: АКТИВИРОВАН ПРОТОКОЛ 'ВОЛК'",
+                    "КОД ДОСТУПА: КРАСНЫЙ-12",
+                    "СВЯЗЬ С АГЕНТОМ УСТАНОВЛЕНА",
+                    "ОБНОВЛЕНИЕ БАЗЫ ДАННЫХ..."
+                ];
+                alert(messages[Math.floor(Math.random() * messages.length)]);
+            }
+        });
+        
+        // Фейковая загрузка данных
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('%c[СИСТЕМА МВД] Загрузка данных по делу 3487...', 'color: red; font-weight: bold;');
+                console.log('%c[СИСТЕМА] Доступ к камерам наблюдения...', 'color: blue;');
+                console.log('%c[СИСТЕМА] Поиск по базам Интерпола...', 'color: green;');
+            }, 1000);
+        });
+        
+        // Таймер "онлайн"
+        setInterval(() => {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ru-RU');
+            document.title = `🟢 ${timeStr} - Розыск МВД`;
+            setTimeout(() => {
+                document.title = `🔴 ${timeStr} - Розыск МВД`;
+            }, 500);
+        }, 1000);
+    </script>
+</body>
+</html>
